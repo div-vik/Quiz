@@ -1,0 +1,79 @@
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.login,
+.signup,
+.home {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  background-color: blueviolet;
+  width: 700px;
+  margin: 70px;
+  padding: 20px;
+  border-radius: 25px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label,
+input,
+p {
+  margin: 5px;
+}
+
+input {
+  padding: 5px;
+  border-radius: 5px;
+  border: none;
+  height: 20px;
+  outline: none;
+}
+
+button {
+  width: 120px;
+  height: 40px;
+  margin: 5px;
+  margin-top: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #1dbf73;
+  color: white;
+  align-self: flex-start;
+  cursor: pointer;
+}
+
+span {
+  margin-left: 4px;
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logout {
+  margin-top: 15px;
+}
+
+.question {
+  margin: 5px;
+}
+
+.question-num {
+  margin: 5px;
+}
+
+.answers {
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+}
