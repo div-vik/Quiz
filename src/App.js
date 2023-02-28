@@ -1,10 +1,17 @@
-import Home from "./pages/home/Home";
-import Login from "./pages/login/Login";
-import Quiz from "./pages/quiz/Quiz";
-import SignUp from "./pages/signup/SignUp";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Quiz from "./pages/Quiz";
+import SignUp from "./pages/SignUp";
 import "./App.css";
-import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  Outlet,
+  Route,
+  RouterProvider,
+} from "react-router-dom";
 import { useState } from "react";
+import ProtectedRoute from "./services/ProtectedRoute";
 
 function App() {
   const Layout = () => {
@@ -15,35 +22,18 @@ function App() {
     );
   };
 
-  // const [redirect, setRedirect] = useState(<SignUp />);
-  // if (localStorage.getItem("signUp")) {
-  //   setRedirect(<Quiz />);
-  // }
-
-  const router = createBrowserRouter([
-    {
-      path: "/",
-      element: <Layout />,
-      children: [
-        {
-          path: "/",
-          element: <Home />,
-        },
-        {
-          path: "/login",
-          element: <Login />,
-        },
-        {
-          path: "/signup",
-          element: <SignUp />,
-        },
-        // {
-        //   path: "/quiz",
-        //   element: <Quiz />,
-        // },
-      ],
-    },
-  ]);
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Layout />}>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/" element={<ProtectedRoute />}>
+          <Route path="/quiz" element={<Quiz />} />
+        </Route>
+        <Route index path="/" element={<Home />} />
+      </Route>
+    )
+  );
 
   return (
     <div className="App">

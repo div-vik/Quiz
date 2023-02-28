@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Report from "../report/Report";
 
 const QuizComp = () => {
   var QuestionBank = [
@@ -118,42 +119,49 @@ const QuizComp = () => {
   };
 
   const skip = () => {
-    setCurrentQue(currentQue + 1);
+    if (currentQue === QuestionBank.length) {
+      setShowScore(true);
+    }
+    const nextQuestion = currentQue + 1;
+    if (nextQuestion < QuestionBank.length) {
+      setCurrentQue(nextQuestion);
+    } else {
+      setShowScore(true);
+    }
   };
 
   return (
     <div>
       {showScore ? (
-        <div className="score">
-          You have scored {score} out of {QuestionBank.length}
-          <>
-            <button type="submit" onClick={resetQuiz}>
-              Play Again
-            </button>
-          </>
-        </div>
+        <Report score={score} questionBank={QuestionBank} onClick={resetQuiz} />
       ) : (
         <>
           <div className="question">
             <div className="question-num">
-              <span>{currentQue + 1}</span>/{QuestionBank.length}
+              <h3>
+                <span>{currentQue + 1}</span>/{QuestionBank.length}
+              </h3>
             </div>
 
             <div className="question-text">
-              {QuestionBank[currentQue].Question}
+              <h3>{QuestionBank[currentQue].Question}</h3>
             </div>
           </div>
 
           <div className="answers">
-            {QuestionBank[currentQue].Answers.map((answer) => (
-              <button onClick={() => handleAnswerResponse(answer.isCorrect)}>
+            {QuestionBank[currentQue].Answers.map((answer, index) => (
+              <button
+                className="options"
+                key={index}
+                onClick={() => handleAnswerResponse(answer.isCorrect)}
+              >
                 {answer.Answer}
               </button>
             ))}
           </div>
-          {/* <button type="submit" onClick={() => skip}>
+          <button className="skip" type="submit" onClick={() => skip()}>
             Skip
-          </button> */}
+          </button>
         </>
       )}
     </div>
